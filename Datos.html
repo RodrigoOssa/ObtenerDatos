@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Información</title>
+<link rel="stylesheet" media="only screen and (max-height:500px)" type="text/css" href="datos.css">
+<script type="text/javascript">
+var alto = window.screen.height;
+var ancho = window.screen.width;
+var disp = window.navigator.platform;
+function resolucion () {
+	document.writeln("<tr><td class='blanco'>Resolución</td><td>"+ancho+" x "+alto+"</td></tr>");
+}
+function sis_operativo () {
+	var so = window.navigator.appVersion.toLowerCase();
+	if (so.indexOf("win") != -1) {
+		document.writeln("<tr><td class='blanco'>S. O. </td><td>Windows</td></tr>");
+	}	
+	else if (so.indexOf("linux") != -1) {
+		document.writeln("<tr><td class='blanco'>S. O. </td><td>linux</td></tr>");
+	}
+	else if (so.indexOf("android") != -1) {
+		document.writeln("<tr><td class='blanco'>S. O. </td><td>Android</td></tr>");
+	}
+}
+function plataforma () {
+	var pla = window.navigator.platform;
+	document.writeln("<tr><td class='blanco'>Plataforma </td><td>"+pla+"</td></tr>");
+}
+function bateria () {
+	document.write("<tr><td class='blanco'>Nivel Batería </td><td id='batery'>"+"</td></tr>");
+	var bateri = document.getElementById("batery");
+	if (window.navigator.getBattery) {
+		navigator.getBattery().then(function(battery) {
+			bat = battery.level;
+			bate = bat*100;
+			bate = Math.floor(bate);
+			bateri.innerHTML += bate+"%";
+	});
+	}
+	else if (navigator.battery) {
+		bat = navigator.battery.level;
+		bate = bat*100;
+		bate = Math.floor(bate);
+		bateri.innerHTML += bate+"%";
+	}
+	else {
+		bateri.innerHTML = "No Compatible";
+	}
+}
+function lenguaje () {
+	var leng = navigator.language;
+	document.write("<tr><td class='blanco'>Lenguaje Navegador</td><td>"+leng+"</td></tr>")
+}
+</script>
+<style type="text/css">
+body{
+	background-color: black;
+	padding: 0px;
+}
+html, body{
+	margin:0px;
+	padding: 0px;
+}
+#box{
+	height: auto;
+	min-height: 150px;
+	width: auto;
+	min-width: 200px;
+	margin: 5% auto 5% auto;
+	border-radius: 5px;
+	margin-right: 5%;
+	margin-left: 5%;
+}
+.texto{
+	text-align: center;
+	font-family: sans-serif;
+	font-size: 25px;
+	font-weight: bold;
+	color: green;
+}
+.blanco{
+	color: white;
+}
+table{
+	border: 2px solid white;
+	margin: auto;
+	display: inline-block;
+	margin-bottom: 50px;
+}
+table th{
+	color: white;
+	border: 2px solid white;
+	margin: 0px;
+	padding: 5px 10px 5px 10px;
+}
+table td{
+	border: 2px solid white;
+	padding: 1px 10px 1px 10px;
+}
+footer{
+	height: 25px;
+	margin: 50px 0px 0px 0px;
+	border-top: 1px solid white;
+	bottom: 0px;
+	position: fixed;
+	clear: both;
+	left: 0px;
+	width: 100%;
+}
+.foot{
+	color: red;
+	font-weight: bold;
+	font-family: sans-serif;
+	text-align: left;
+	font-size: 15px;
+}
+</style>
+</head>
+
+<body>
+	<div id="box">
+	<div id="caja" class="texto"> 
+		<table>
+			<thead>
+				<th colspan="2">Información del sistema</th>
+			</thead>
+			<tbody>
+				<script type="text/javascript">
+					resolucion();
+					sis_operativo();
+					plataforma();
+					bateria();
+					lenguaje();
+				</script>
+			</tbody>
+		</table>
+	</div>
+</div>
+<footer class="foot">By Rodry</footer>
+</body>
+</html>
